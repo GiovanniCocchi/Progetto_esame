@@ -20,9 +20,10 @@ from .views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r"^$|^/$|home/$", page_with_static, name='Home')
+    re_path(r"^$|^/$|home/$", page_with_static, name='Home'),
     #path('Registrazione_Cliente/pagina-di-conferma.html', Conferma_caricamento_cliente,name='Conferma_caricamento_cliente'),
     #path('Registrazione_Cliente/', registrazione_cliente, name='Registra_cliente'),
     #path('login/', login_view, name='login'),
     #path('Gestione/', include("Gestione.urls"))
+    path('Calendario/', Calendario_page.as_view(), name="Calendario"),
 ]
