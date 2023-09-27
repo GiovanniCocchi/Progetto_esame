@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block head %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href='{% static "/css/stile.css" %}'>
+{% endblock %}
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+<div style="float: left; text-align: justify; width: 40%;">
+<h1 style="text-align:center">
+    GiococchiPhoto
+</h1>
+    <h2 style="text-align:center">
+        <img src="{% static 'imgs/20180409212327_IMG_4253.JPG' %}" alt="prima foto" width="200" height="200">
+    </h2>
+    <hr>
+    <p><img src="{% static 'imgs/IMG_6170.JPG' %}" alt="prima foto" width="150" height="200">
+    <img src="{% static 'imgs/IMG_4427.JPG' %}" alt="prima foto" width="150" height="200">
+    <img src="{% static 'imgs/IMG_4645.JPG' %}" alt="prima foto" width="150" height="200">
+    <img src="{% static 'imgs/20220730134117_IMG_0073.JPG' %}" alt="prima foto" width="150" height="200">
+    <img src="{% static 'imgs/20221025113604_IMG_2082.JPG' %}" alt="prima foto" width="150" height="200">
+    <img src="{% static 'imgs/20230131120544_IMG_4242.JPG' %}" alt="prima foto" width="150" height="200">
+    <img src="{% static 'imgs/GOPR3122_1660496247348.JPG' %}" alt="prima foto" width="150" height="200"></p>
+</div>
+<div style="float: right; text-align: justify; width: 40%;">
+<h1>
+    Fabio Benegiamo
+</h1>
+    <p>
+        Foto Fabio
+           Foto Fabio
+            Foto Fabio
+            Foto Fabio
+            Foto Fabio
+            Foto Fabio
+            Foto Fabio
+    </p>
+</div>
+<div style="clear: both;">
+</div>
+
+
+<center>
+    <form action="http://localhost:8000/login/">
+    <input type="submit" value="Accedi" />
+</form>
+    <form action="http://localhost:8000/Registrazione_Cliente/">
+    <input type="submit" value="Registra Cliente" />
+</form>
+    <form action="http://localhost:8000/Calendario/">
+    <input type="submit" value="Vedi il calendario" />
+</form>
+
+
+</center>
+
+{% endblock %}
