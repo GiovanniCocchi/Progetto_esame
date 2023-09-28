@@ -8,7 +8,7 @@ class Servizio(models.Model):
     actioncam = models.BooleanField()
     drone = models.BooleanField()
     #fotografi = models.ForeignKey(User, on_delete=models.CASCADE)
-    #cliente = models.ForeignKey(User,on_delete=models.CASCADE)
+    #cliente = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
     class Meta:

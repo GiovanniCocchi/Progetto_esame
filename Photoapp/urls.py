@@ -17,13 +17,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from .views import *
+from .initcmd import crea_gruppi
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r"^$|^/$|home/$", page_with_static, name='Home'),
-    #path('Registrazione_Cliente/pagina-di-conferma.html', Conferma_caricamento_cliente,name='Conferma_caricamento_cliente'),
-    #path('Registrazione_Cliente/', registrazione_cliente, name='Registra_cliente'),
+    path("login/", auth_views.LoginView.as_view(), name="login"),
+    #path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+
+    path('Registrazione_Cliente/pagina-di-conferma.html', Conferma_caricamento_cliente ,name='Conferma_caricamento_cliente'),
+    path('Registrazione_Cliente/', CreaUtente.as_view(), name='Crea_cliente'),
     #path('login/', login_view, name='login'),
     #path('Gestione/', include("Gestione.urls"))
     path('Calendario/', Calendario_page.as_view(), name="Calendario"),
 ]
+crea_gruppi()
+

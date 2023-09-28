@@ -2,7 +2,8 @@
 import json
 import os
 from datetime import datetime
-
+from django.contrib.auth.forms import UserCreationForm
+from .forms import CreaCliente
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.staticfiles import finders
@@ -102,3 +103,12 @@ def get_day_info(request):
     }
     # Return the dictionary as a JSON response
     return JsonResponse(data)  # TODO Implementarlo nel html"""
+
+
+class CreaUtente(CreateView):
+    form_class = CreaCliente
+    template_name = "registrazione.html"
+    success_url = reverse_lazy("Conferma_caricamento_cliente")
+
+def Conferma_caricamento_cliente(request):
+    return render(request, template_name="pagina-di-conferma.html")
