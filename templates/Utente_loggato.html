@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %} Utente loggato {% endblock %}
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utente loggato</title>
+</head>
+
+
+<body>
+    <h1>Benvenuto, [Nome Utente]</h1>
+
+    <!-- Pulsante per la prenotazione di servizio -->
+    <a href="{% url 'Prenotazione' %}"><button>Prenota Servizio</button></a>
+    <!-- Pulsante per visualizzare tutti i servizi prenotati -->
+    <a href="{% url 'Home' %}"><button>Servizi Prenotati</button></a>
+    <!-- Pulsante per cancellare un servizio -->
+    <a href="{% url 'Home' %}"><button>Cancella Servizio</button></a>
+    <!-- Pulsante per andare alla chat -->
+    <a href="{% url 'Home' %}"><button>Chat</button></a>
+    <!-- Pulsante per andare alla sezione di modifica foto -->
+    <a href="{% url 'Home' %}"><button>Modifica Foto</button></a>
+    <!-- Pulsante per il logout -->
+    <a href="{% url 'Home' %}"><button>Logout</button></a>
+
+</body>
+
+
+{% endblock %}
+
+

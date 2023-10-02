@@ -112,3 +112,9 @@ class CreaUtente(CreateView):
 
 def Conferma_caricamento_cliente(request):
     return render(request, template_name="pagina-di-conferma.html")
+
+def Utenteloggato(request):
+    return render(request, template_name="Utente_loggato.html")
+
+
+

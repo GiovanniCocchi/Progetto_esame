@@ -7,8 +7,8 @@ class Servizio(models.Model):
     reflex = models.BooleanField()
     actioncam = models.BooleanField()
     drone = models.BooleanField()
-    #fotografi = models.ForeignKey(User, on_delete=models.CASCADE)
-    #cliente = models.ForeignKey(User, on_delete=models.CASCADE)
+    fotografi = models.ManyToManyField(User, related_name='servizio_fotografi',default='Blyad ')
+    cliente = models.ForeignKey(User, on_delete=models.CASCADE, related_name='servizio_cliente', default='Blyad ')
 
 
     class Meta:
