@@ -11,18 +11,18 @@
 
 
 <body>
-    <h1>Benvenuto, [Nome Utente]</h1>
+    <h1>Benvenuto {{ user.username }}</h1>
 
     <!-- Pulsante per la prenotazione di servizio -->
-    <a href="{% url 'Prenotazione' %}"><button>Prenota Servizio</button></a>
+    <a href="{% url 'Prenotazione' user_pk %}"><button>Prenota Servizio</button></a>
     <!-- Pulsante per visualizzare tutti i servizi prenotati -->
-    <a href="{% url 'Home' %}"><button>Servizi Prenotati</button></a>
+    <a href="{% url 'servizio-list' %}"><button>Servizi Prenotati</button></a>
     <!-- Pulsante per cancellare un servizio -->
-    <a href="{% url 'Home' %}"><button>Cancella Servizio</button></a>
+    <a href="{% url 'Loggato' %}"><button>Cancella Servizio</button></a>
     <!-- Pulsante per andare alla chat -->
-    <a href="{% url 'Home' %}"><button>Chat</button></a>
+    <a href="{% url 'Loggato' %}"><button>Chat</button></a>
     <!-- Pulsante per andare alla sezione di modifica foto -->
-    <a href="{% url 'Home' %}"><button>Modifica Foto</button></a>
+    <a href="{% url 'Loggato' %}"><button>Modifica Foto</button></a>
     <!-- Pulsante per il logout -->
     <a href="{% url 'Home' %}"><button>Logout</button></a>
 

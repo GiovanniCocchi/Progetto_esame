@@ -4,6 +4,7 @@ from crispy_forms.layout import Submit
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
 from django import forms
+from django.forms import DateInput
 
 from Gestione.models import Servizio
 
@@ -23,5 +24,8 @@ class CreaServizio(forms.ModelForm):
 
     class Meta:
         model = Servizio
-        fields=['data','reflex', 'actioncam', 'drone', 'fotografi','cliente']
+        fields=['data','reflex', 'actioncam', 'drone', 'fotografi']
+        widgets = {
+            'data': DateInput(attrs={'type': 'date'}),
+        }
 

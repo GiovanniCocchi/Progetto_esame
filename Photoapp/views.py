@@ -114,7 +114,11 @@ def Conferma_caricamento_cliente(request):
     return render(request, template_name="pagina-di-conferma.html")
 
 def Utenteloggato(request):
-    return render(request, template_name="Utente_loggato.html")
+    pk = request.user.pk
+    context = {
+        'user_pk': pk,
+    }
+    return render(request, template_name="Utente_loggato.html",context=context)
 
 
 

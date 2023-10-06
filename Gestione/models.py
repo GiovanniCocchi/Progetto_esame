@@ -7,8 +7,8 @@ class Servizio(models.Model):
     reflex = models.BooleanField()
     actioncam = models.BooleanField()
     drone = models.BooleanField()
-    fotografi = models.ManyToManyField(User, related_name='servizio_fotografi',default='Blyad ')
-    cliente = models.ForeignKey(User, on_delete=models.CASCADE, related_name='servizio_cliente', default='Blyad ')
+    fotografi = models.ManyToManyField(User, related_name='servizio_fotografi',default='0')
+    cliente = models.ForeignKey(User, on_delete=models.CASCADE, related_name='servizio_cliente', default='0')
 
 
     class Meta:
@@ -23,6 +23,7 @@ class Immagine(models.Model):
     #cliente = models.ForeignKey(User,on_delete=models.CASCADE)
     stato = models.CharField(max_length=100, default='da modificare')
     foto_modificata = models.ImageField(upload_to='foto_modificate/', blank=True, null=True)
+
 
 
     def __str__(self):
