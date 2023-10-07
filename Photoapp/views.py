@@ -2,6 +2,8 @@
 import json
 import os
 from datetime import datetime
+
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreaCliente
 from django.contrib.auth import authenticate, login
@@ -113,6 +115,7 @@ class CreaUtente(CreateView):
 def Conferma_caricamento_cliente(request):
     return render(request, template_name="pagina-di-conferma.html")
 
+@login_required
 def Utenteloggato(request):
     pk = request.user.pk
     context = {

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
@@ -5,12 +7,14 @@ from django.views.generic import CreateView, ListView, DeleteView
 
 from Gestione.models import Servizio
 from Photoapp.forms import CreaServizio
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
 
 
-class Prenotazione_Servizio(CreateView):
+
+class Prenotazione_Servizio(LoginRequiredMixin,CreateView):
     form_class = CreaServizio
     template_name ="Crea_servizio.html"
     success_url = reverse_lazy("ServizioPrenotato")
@@ -38,6 +42,13 @@ class Prenotazione_Servizio(CreateView):
            # Se ci sono già servizi prenotati nella data, comunica al cliente
            form.add_error('data', 'Il servizio è già prenotato per questa data.')
            return self.form_invalid(form)
+        oggi = datetime.now()
+        oggi2= datetime.date(oggi)
+        if oggi2 > data_scelta:
+            form.add_error('data', 'Scegli una data futura')
+            return self.form_invalid(form)
+
+
 
 
         # Recuperiamo il cliente e lo impostiamo
