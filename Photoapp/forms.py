@@ -6,7 +6,7 @@ from django.contrib.auth.models import Group
 from django import forms
 from django.forms import DateInput
 
-from Gestione.models import Servizio
+from Gestione.models import Servizio, Immagine
 
 
 class CreaCliente(UserCreationForm):
@@ -28,4 +28,15 @@ class CreaServizio(forms.ModelForm):
         widgets = {
             'data': DateInput(attrs={'type': 'date'}),
         }
+
+class Caricaimmagine(forms.ModelForm):
+    helper = FormHelper()
+    helper.form_id = "carica_immagine"
+    helper.form_method = "POST"
+    helper.add_input(Submit('submit', 'submit'))
+
+    class Meta:
+        model = Immagine
+        fields=['Descrizione','immagine', 'fotografi']
+        widgets = {}
 

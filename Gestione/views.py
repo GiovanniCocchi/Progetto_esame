@@ -5,8 +5,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DeleteView
 
-from Gestione.models import Servizio
-from Photoapp.forms import CreaServizio
+from Gestione.models import Servizio, Immagine
+from Photoapp.forms import CreaServizio, Caricaimmagine
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -101,6 +101,42 @@ class ServizioDeleteView(LoginRequiredMixin, DeleteView):
         return Servizio.objects.filter(cliente=self.request.user)
     """
 
+class carica_immagine(CreateView,LoginRequiredMixin):
+    form_class = Caricaimmagine
+    template_name = "Carica_immagine.html"
+    success_url = reverse_lazy("ImmagineCaricata")
 
+    def get_user(self):
+        pk = self.kwargs.get('utente_pk')
+        print(pk)
+        try:
+            user = User.objects.get(pk=pk)
+            return user
+        except Exception:
+            print("blyad")
+        return None
+    def form_valid(self, form):
+        print("provo a validare il form")
+        cliente = self.get_user()
+        form.instance.cliente = cliente
 
+        # salva la foto e reindirizza all'URL di successo
+        return super().form_valid(form)
+
+def Conferma_caricamento(request):
+    return render(request, template_name="Immagine_caricata.html")
+
+class ImmaginiListView(LoginRequiredMixin, ListView):
+    model = Immagine
+    template_name = 'Immagine_list.html'
+    context_object_name = 'Immagini'
+
+    def get_queryset(self):
+        # Ottieni l'oggetto utente loggato
+        user = self.request.user
+
+        # Filtra i servizi associati all'utente loggato
+        queryset = Servizio.objects.filter(cliente=user)
+
+        return queryset
 

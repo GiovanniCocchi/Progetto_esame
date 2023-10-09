@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Le tue immagini da modificare</h1>
+
+  {% if Immagini %}
+    <ul>
+      {% for imm in Immagini %}
+        <li>
+          <strong>Data:</strong> {{ imm.data_caricamento }}<br>
+          <strong>Descrizione:</strong> {{imm.Descrizione|default:"N/A"}}<br>
+          <strong>Stato:</strong> {{imm.stato}}<br>
+          <strong>Fotografo:</strong>{{imm.fotografi_id}}<br>
+
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Nessuna immagine da modificare disponibile.</p>
+  {% endif %}
+
+
+
+<a href="{% url 'Loggato' %}"><button>Indietro</button></a>
+{% endblock %}
+
+<script>
+  console.log(Immagini)
+</script>

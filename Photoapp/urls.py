@@ -24,11 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r"^$|^/$|home/$", page_with_static, name='Home'),
     path("login/", auth_views.LoginView.as_view(), name="login"),
-    #path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("Utente_loggato/", Utenteloggato ,name="Loggato"),
     path('Registrazione_Cliente/pagina-di-conferma.html', Conferma_caricamento_cliente ,name='Conferma_caricamento_cliente'),
     path('Registrazione_Cliente/', CreaUtente.as_view(), name='Crea_cliente'),
-    #path('login/', login_view, name='login'),
     path('Gestione/', include("Gestione.urls")),
     path('Calendario/', Calendario_page.as_view(), name="Calendario"),
 

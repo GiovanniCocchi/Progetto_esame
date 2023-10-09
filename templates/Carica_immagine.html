@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %} Caricamento immagine {% endblock %}
+{% block content %}
+
+<body>
+    <h1>Carica un'immagine</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Carica</button>
+    </form>
+    <a href="{% url 'Loggato' %}"><button>Indietro</button></a>
+</body>
+
+{% endblock %}

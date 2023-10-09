@@ -74,23 +74,66 @@
       servizioTrasformato[data] = servizio;
       serviziTrasformati.push(servizioTrasformato);
     }
+    let serviceInfoByDay = {};
 
-      for (let row = 0; row < 6; row++) {
-        calendarHTML += "<tr>";
-        for (let col = 0; col < 7; col++) {
+    serviziTrasformati.forEach(servizio => {
+      const serviceDate = new Date(Object.keys(servizio)[0]);
+      const dayOfMonth = serviceDate.getDate();
+      serviceInfoByDay[dayOfMonth] = servizio[Object.keys(servizio)[0]];
+    });
 
-          if ((row === 0 && col < firstDay) || dayCount > daysInMonth) {
-            calendarHTML += "<td></td>";
-          } else {
-            calendarHTML += `<td>${dayCount}  </td>`; // Questa riga modifica il contenuto delle caselle
-            dayCount++;
+    for (let row = 0; row < 6; row++) {
+  calendarHTML += "<tr>";
+  for (let col = 0; col < 7; col++) {
+    if ((row === 0 && col < firstDay) || dayCount > daysInMonth) {
+      calendarHTML += "<td></td>";
+    } else {
+      const serviceInfo = serviceInfoByDay[dayCount];
+
+      if (serviceInfo) {
+        // Verifica se il giorno appartiene al mese corrente
+        const serviceDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), dayCount);
+        if (serviceDate.getMonth() === currentDate.getMonth()) {
+          const photographer = serviceInfo.fotografi;
+          const reflex = serviceInfo.reflex;
+          const actioncam = serviceInfo.actioncam;
+          const drone = serviceInfo.drone;
+
+          let dayContent = `<td class="has-service">${dayCount}<br>`;
+
+          if (photographer) {
+            dayContent += `Fotografo: ${photographer}<br>`;
           }
-        }
-        calendarHTML += "</tr>";
-      }
 
-      calendarBody.innerHTML = calendarHTML;
+          if (reflex) {
+            dayContent += "Reflex ";
+          }
+
+          if (actioncam) {
+            dayContent += "Actioncam ";
+          }
+
+          if (drone) {
+            dayContent += "Drone ";
+          }
+
+          dayContent += "</td>";
+
+          calendarHTML += dayContent;
+        } else {
+          calendarHTML += `<td>${dayCount}</td>`;
+        }
+      } else {
+        calendarHTML += `<td>${dayCount}</td>`;
+      }
+      dayCount++;
     }
+  }
+  calendarHTML += "</tr>";
+}
+
+    calendarBody.innerHTML = calendarHTML;
+  }
 
     updateCalendar();
 
@@ -127,7 +170,7 @@ nextMonthLink.addEventListener("click", function (e) {
   e.preventDefault(); // Impedisce al link di navigare a un nuovo URL
 
   currentDate.setMonth(currentDate.getMonth() + 1);
-  updateCalendar();
+
 
   // Aggiorna l'URL con i nuovi parametri
   const year = currentDate.getFullYear();
@@ -135,6 +178,7 @@ nextMonthLink.addEventListener("click", function (e) {
   const queryParams = `?year=${year}&month=${month}`;
 
   history.replaceState({}, '', queryParams);
+  updateCalendar();
 });
   </script>
 <a href="{% url 'Home' %}"><button>Torna alla home</button></a>
