@@ -6,7 +6,7 @@ from .views import *
 urlpatterns = [
 
     path('carica_immagine/<utente_pk>', carica_immagine.as_view(), name='carica_immagine'),
-    path('/Conferma_caricamento.html', Conferma_caricamento, name='ImmagineCaricata'),
+    path('Conferma_caricamento.html', Conferma_caricamento, name='ImmagineCaricata'),
     path('Immagini/', ImmaginiListView.as_view(), name='immagine-list'),
     #path('Download/',Download,name='scarica_immagini'),
     #path('Pagina_utente/', Pagina_utente, name='Pagina_utente'),

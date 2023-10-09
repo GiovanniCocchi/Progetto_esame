@@ -38,5 +38,4 @@ class Caricaimmagine(forms.ModelForm):
     class Meta:
         model = Immagine
         fields=['Descrizione','immagine', 'fotografi']
-        widgets = {}
 

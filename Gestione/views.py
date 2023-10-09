@@ -136,7 +136,7 @@ class ImmaginiListView(LoginRequiredMixin, ListView):
         user = self.request.user
 
         # Filtra i servizi associati all'utente loggato
-        queryset = Servizio.objects.filter(cliente=user)
+        queryset = Immagine.objects.filter(cliente_id=user)
 
         return queryset
 

@@ -8,10 +8,10 @@
       {% for imm in Immagini %}
         <li>
           <strong>Data:</strong> {{ imm.data_caricamento }}<br>
-          <strong>Descrizione:</strong> {{imm.Descrizione|default:"N/A"}}<br>
+          <strong>Descrizione:</strong> {{imm.Descrizione}}<br>
           <strong>Stato:</strong> {{imm.stato}}<br>
           <strong>Fotografo:</strong>{{imm.fotografi_id}}<br>
-
+          <br>
         </li>
       {% endfor %}
     </ul>
@@ -23,7 +23,3 @@
 
 <a href="{% url 'Loggato' %}"><button>Indietro</button></a>
 {% endblock %}
-
-<script>
-  console.log(Immagini)
-</script>
