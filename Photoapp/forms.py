@@ -2,7 +2,7 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django import forms
 from django.forms import DateInput
 
@@ -22,6 +22,11 @@ class CreaServizio(forms.ModelForm):
     helper.form_method = "POST"
     helper.add_input(Submit('submit', 'submit'))
 
+    def __init__(self, *args, **kwargs):
+        super(CreaServizio, self).__init__(*args, **kwargs)
+        # Filtra gli utenti del gruppo "fotografi" per il campo "fotografi"
+        self.fields['fotografi'].queryset = User.objects.filter(groups__name='fotografo')
+
     class Meta:
         model = Servizio
         fields=['data','reflex', 'actioncam', 'drone', 'fotografi']
@@ -34,6 +39,11 @@ class Caricaimmagine(forms.ModelForm):
     helper.form_id = "carica_immagine"
     helper.form_method = "POST"
     helper.add_input(Submit('submit', 'submit'))
+
+    def __init__(self, *args, **kwargs):
+        super(Caricaimmagine, self).__init__(*args, **kwargs)
+        # Filtra gli utenti del gruppo "fotografi" per il campo "fotografi"
+        self.fields['fotografi'].queryset = User.objects.filter(groups__name='fotografo')
 
     class Meta:
         model = Immagine

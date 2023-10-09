@@ -34,10 +34,7 @@ class Prenotazione_Servizio(LoginRequiredMixin,CreateView):
         print("provo a validare il form")
         # Verifica se esiste già un servizio prenotato nella data selezionata
         data_scelta = form.cleaned_data['data']
-
         servizi_nella_data = Servizio.objects.filter(data=data_scelta)
-
-
         if servizi_nella_data.exists():
            # Se ci sono già servizi prenotati nella data, comunica al cliente
            form.add_error('data', 'Il servizio è già prenotato per questa data.')
@@ -47,16 +44,12 @@ class Prenotazione_Servizio(LoginRequiredMixin,CreateView):
         if oggi2 > data_scelta:
             form.add_error('data', 'Scegli una data futura')
             return self.form_invalid(form)
-
-
-
-
         # Recuperiamo il cliente e lo impostiamo
         cliente = self.get_user()
         form.instance.cliente = cliente
-
         # Se la data è disponibile, salva il servizio e reindirizza all'URL di successo
         return super().form_valid(form)
+
 
 class ServizioDeleteView(DeleteView):
     model = Servizio

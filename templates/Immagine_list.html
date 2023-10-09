@@ -10,9 +10,11 @@
           <strong>Data:</strong> {{ imm.data_caricamento }}<br>
           <strong>Descrizione:</strong> {{imm.Descrizione}}<br>
           <strong>Stato:</strong> {{imm.stato}}<br>
-          <strong>Fotografo:</strong>{{imm.fotografi_id}}<br>
+          <strong>Fotografo:</strong>{% if imm.fotografi_id == 3 %} giococchiphoto {% elif imm.fotografi_id == 4 %} Fabio <br>
+          {% endif %}
           <br>
         </li>
+      <br>
       {% endfor %}
     </ul>
   {% else %}
@@ -23,3 +25,5 @@
 
 <a href="{% url 'Loggato' %}"><button>Indietro</button></a>
 {% endblock %}
+
+
