@@ -1,5 +1,7 @@
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 from .views import *
 
@@ -18,4 +20,7 @@ urlpatterns = [
     #visualizza servizi prenotati da se Cliente
     path('Servizi_prenotati/', ServizioListView.as_view(), name='servizio-list'),
     #path('servizio/<int:pk>/delete/', ServizioDeleteView.as_view(), name='servizio-delete'),
-]
+    path('Immagini_ph/', ImmaginiListViewph.as_view(), name='immagine-list_ph'),
+    path('scarica/<immagine_pk>/', scarica, name='scarica_foto'),
+] \
+              #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,7 +2,7 @@
 
 {% block content %}
   <h1>Le tue immagini da modificare</h1>
-
+  {% if "cliente" in  user.groups.all.0.name %}
   {% if Immagini %}
     <ul>
       {% for imm in Immagini %}
@@ -10,8 +10,11 @@
           <strong>Data:</strong> {{ imm.data_caricamento }}<br>
           <strong>Descrizione:</strong> {{imm.Descrizione}}<br>
           <strong>Stato:</strong> {{imm.stato}}<br>
-          <strong>Fotografo:</strong>{% if imm.fotografi_id == 3 %} giococchiphoto {% elif imm.fotografi_id == 4 %} Fabio <br>
+          <strong>Immagine da modificare:</strong> {{imm.immagine}}<br>
+          <strong>Fotografo:</strong>{% if imm.fotografi_id == 3 %} giococchiphoto <br> {% elif imm.fotografi_id == 4 %} Fabio <br>
           {% endif %}
+          <strong>Immagine modificata:</strong> {{imm.foto_modificata}}<br>
+
           <br>
         </li>
       <br>
@@ -20,10 +23,30 @@
   {% else %}
     <p>Nessuna immagine da modificare disponibile.</p>
   {% endif %}
+{% elif "fotografo" in  user.groups.all.0.name %}
+  {% if Immagini %}
+    <ul>
+      {% for imm in Immagini %}
+        <li>
+          <strong>Data:</strong> {{ imm.data_caricamento }}<br>
+          <strong>Descrizione:</strong> {{imm.Descrizione}}<br>
+          <strong>Stato:</strong> {{imm.stato}}<br>
+          <strong>Immagine da modificare:</strong>
+          <a href="{% url 'scarica_foto' imm.pk %}" download="{{ immagine.immagine.name }}"><button>scarica</button></a>
+          {{imm.immagine}}
+          <strong>Immagine modificata:</strong> {{imm.foto_modificata}}<br>
+
+          <br>
+        </li>
+      <br>
+      {% endfor %}
+
+ {% endif %}
+      </ul>
+{% endif %}
+
 
 
 
 <a href="{% url 'Loggato' %}"><button>Indietro</button></a>
 {% endblock %}
-
-

@@ -11,6 +11,7 @@
 
 
 <body>
+    {% if "cliente" in  user.groups.all.0.name %}
     <h1>Benvenuto {{ user.username }}</h1>
 
     <!-- Pulsante per la prenotazione di servizio -->
@@ -25,6 +26,20 @@
     <a href="{% url 'immagine-list' %}"><button>Immagini da modificare</button></a>
     <!-- Pulsante per il logout -->
     <a href="{% url 'Home' %}"><button>Logout</button></a>
+    {% endif %}
+
+
+    {% if "fotografo" in  user.groups.all.0.name %}
+    <h1>Benvenuto {{ user.username }}</h1>
+
+    <!-- Pulsante per visualizzare tutte le immagini da modificare -->
+    <a href="{% url 'immagine-list_ph' %}"><button>Immagini da modificare</button></a>
+    <!-- Pulsante per andare alla chat -->
+    <a href="{% url 'Loggato' %}"><button>Chat</button></a>
+    <!-- Pulsante per il logout -->
+    <a href="{% url 'Home' %}"><button>Logout</button></a>
+    {% endif %}
+
 
 </body>
 

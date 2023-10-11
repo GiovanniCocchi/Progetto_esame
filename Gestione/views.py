@@ -1,11 +1,15 @@
+import os
 from datetime import datetime
 
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.http import FileResponse, HttpResponseNotFound, response
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
+from django.views import View
 from django.views.generic import CreateView, ListView, DeleteView
 
 from Gestione.models import Servizio, Immagine
+from Photoapp import settings
 from Photoapp.forms import CreaServizio, Caricaimmagine
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -132,4 +136,32 @@ class ImmaginiListView(LoginRequiredMixin, ListView):
         queryset = Immagine.objects.filter(cliente_id=user)
 
         return queryset
+
+
+class ImmaginiListViewph(LoginRequiredMixin,ListView):
+    model = Immagine
+    template_name = 'immagine_list.html'
+    context_object_name = 'Immagini'
+
+    def get_queryset(self):
+        # Ottieni l'oggetto utente loggato
+        user = self.request.user
+        print("sono qui")
+        print(user)
+        userid=user.id
+        # Filtra i servizi associati all'utente loggato
+        queryset = Immagine.objects.filter(fotografi=userid)
+        print(userid)
+
+        return queryset
+
+def scarica(request, immagine_pk):
+    """immagine=Immagine.objects.get(pk=immagine_pk)
+    with open(str(immagine.immagine), "rb") as ciucciacazzi:
+        response=FileResponse(ciucciacazzi)
+    return response"""
+    immagine = get_object_or_404(Immagine, pk=immagine_pk)
+    response = FileResponse(open(str(immagine.immagine), 'rb'))
+    return response
+
 

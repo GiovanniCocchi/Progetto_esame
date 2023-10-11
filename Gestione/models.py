@@ -22,7 +22,7 @@ class Immagine(models.Model):
     fotografi = models.ForeignKey(User, on_delete=models.CASCADE,related_name='immagine_fotografi',default=0)
     cliente = models.ForeignKey(User,on_delete=models.CASCADE, related_name='immagine_cliente', default=0)
     stato = models.CharField(max_length=100, default='da modificare')
-    foto_modificata = models.ImageField(upload_to='foto_modificate/', blank=True, null=True)
+    foto_modificata = models.ImageField(upload_to='immagini_da_modificare/', blank=True, null=True)
 
 
 
