@@ -49,3 +49,21 @@ class Caricaimmagine(forms.ModelForm):
         model = Immagine
         fields=['Descrizione','immagine', 'fotografi']
 
+
+class ImmagineUpdateView(forms.ModelForm):
+    helper = FormHelper()
+    helper.form_id = "modifica_immagine"
+    helper.form_method = "POST"
+    helper.add_input(Submit('submit', 'submit'))
+
+    class Meta:
+        model= Immagine
+        fields= ['foto_modificata']
+
+    def save(self, commit=True):
+        istanza = super().save(commit=False)
+        istanza.stato = 'modificata'  # Imposta lo stato a 'modificata'
+        if commit:
+            istanza.save()
+        return istanza
+

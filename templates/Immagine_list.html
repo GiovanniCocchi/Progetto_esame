@@ -13,8 +13,9 @@
           <strong>Immagine da modificare:</strong> {{imm.immagine}}<br>
           <strong>Fotografo:</strong>{% if imm.fotografi_id == 3 %} giococchiphoto <br> {% elif imm.fotografi_id == 4 %} Fabio <br>
           {% endif %}
-          <strong>Immagine modificata:</strong> {{imm.foto_modificata}}<br>
-
+          {% if imm.foto_modificata %}
+          <strong>Immagine modificata:</strong> <a href="{% url 'scarica_foto_modificata' imm.pk %}" download="{{ immagine.foto_modificata.name }}"><button>scarica</button></a> <br><br>
+          {% endif %}
           <br>
         </li>
       <br>
@@ -32,9 +33,9 @@
           <strong>Descrizione:</strong> {{imm.Descrizione}}<br>
           <strong>Stato:</strong> {{imm.stato}}<br>
           <strong>Immagine da modificare:</strong>
-          <a href="{% url 'scarica_foto' imm.pk %}" download="{{ immagine.immagine.name }}"><button>scarica</button></a>
-          {{imm.immagine}}
-          <strong>Immagine modificata:</strong> {{imm.foto_modificata}}<br>
+          <a href="{% url 'scarica_foto' imm.pk %}" download="{{ immagine.immagine.name }}"><button>scarica</button></a> <br>
+
+          <a href="{% url 'modifica_foto' imm.pk %}"><button>modifica</button></a>
 
           <br>
         </li>

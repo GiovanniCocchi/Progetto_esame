@@ -22,5 +22,7 @@ urlpatterns = [
     #path('servizio/<int:pk>/delete/', ServizioDeleteView.as_view(), name='servizio-delete'),
     path('Immagini_ph/', ImmaginiListViewph.as_view(), name='immagine-list_ph'),
     path('scarica/<immagine_pk>/', scarica, name='scarica_foto'),
+    path('modifica/<immagine_pk>/', ImmagineEditView.as_view(), name='modifica_foto'),
+    path('scarica_modificata/<immagine_pk>/', scarica_modificata, name='scarica_foto_modificata'),
 ] \
               #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

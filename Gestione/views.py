@@ -2,15 +2,16 @@ import os
 from datetime import datetime
 
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.http import FileResponse, HttpResponseNotFound, response
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.views.generic import CreateView, ListView, DeleteView
+from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 
 from Gestione.models import Servizio, Immagine
 from Photoapp import settings
-from Photoapp.forms import CreaServizio, Caricaimmagine
+from Photoapp.forms import CreaServizio, Caricaimmagine, ImmagineUpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -150,7 +151,7 @@ class ImmaginiListViewph(LoginRequiredMixin,ListView):
         print(user)
         userid=user.id
         # Filtra i servizi associati all'utente loggato
-        queryset = Immagine.objects.filter(fotografi=userid)
+        queryset = Immagine.objects.filter(fotografi=userid,stato='da modificare')
         print(userid)
 
         return queryset
@@ -164,4 +165,39 @@ def scarica(request, immagine_pk):
     response = FileResponse(open(str(immagine.immagine), 'rb'))
     return response
 
+class ImmagineEditView(UpdateView):
+    model = Immagine
+    form_class = ImmagineUpdateView
+    template_name = 'modifica_foto.html'
 
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('immagine_pk')
+        immagine = Immagine.objects.get(pk=pk)
+        return immagine
+
+    def form_valid(self, form):
+        immagine = form.save(commit=False)
+        # Ottieni l'immagine caricata dall'utente
+        foto_modificata = self.request.FILES.get('foto_modificata')
+        if foto_modificata:
+            immagine.foto_modificata = foto_modificata
+            print("CI SONO")
+
+        immagine.stato = 'modificata'
+        immagine.save()
+
+        messages.success(self.request, 'Modifiche salvate con successo!')
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse("immagine-list_ph")
+
+
+def scarica_modificata(request, immagine_pk):
+    """immagine=Immagine.objects.get(pk=immagine_pk)
+    with open(str(immagine.immagine), "rb") as ciucciacazzi:
+        response=FileResponse(ciucciacazzi)
+    return response"""
+    immagine = get_object_or_404(Immagine, pk=immagine_pk)
+    response = FileResponse(open(str(immagine.foto_modificata), 'rb'))
+    return response
