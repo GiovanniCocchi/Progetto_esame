@@ -154,9 +154,8 @@ const nextMonthLink = document.getElementById("nextMonth");
 
 prevMonthLink.addEventListener("click", function (e) {
   e.preventDefault(); // Impedisce al link di navigare a un nuovo URL
-
+  var currentURL = window.location.origin + window.location.pathname;
   currentDate.setMonth(currentDate.getMonth() - 1);
-  updateCalendar();
 
   // Aggiorna l'URL con i nuovi parametri
   const year = currentDate.getFullYear();
@@ -164,11 +163,13 @@ prevMonthLink.addEventListener("click", function (e) {
   const queryParams = `?year=${year}&month=${month}`;
 
   history.replaceState({}, '', queryParams);
+  var newURL = currentURL + queryParams;
+  window.location.href = newURL;
 });
 
 nextMonthLink.addEventListener("click", function (e) {
   e.preventDefault(); // Impedisce al link di navigare a un nuovo URL
-
+  var currentURL = window.location.origin + window.location.pathname;
   currentDate.setMonth(currentDate.getMonth() + 1);
 
 
@@ -178,7 +179,8 @@ nextMonthLink.addEventListener("click", function (e) {
   const queryParams = `?year=${year}&month=${month}`;
 
   history.replaceState({}, '', queryParams);
-  updateCalendar();
+  var newURL = currentURL + queryParams;
+  window.location.href = newURL;
 });
   </script>
 <a href="{% url 'Home' %}"><button>Torna alla home</button></a>

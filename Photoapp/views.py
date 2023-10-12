@@ -32,9 +32,12 @@ class Calendario_page(ListView):
 
     def get_queryset(self):
         parameters = self.request.GET
+        print("parameters: " + str(parameters))
         if 'year' in parameters and 'month' in parameters:
             year = int(parameters['year'])
             month = int(parameters['month'])
+            print("year: " + str(year))
+            print("mounth: " + str(month))
             if (month < 1 or month > 12 or year < 1980):
                 data_odierna = datetime.now().date()
                 year = str(data_odierna.year)

@@ -201,3 +201,17 @@ def scarica_modificata(request, immagine_pk):
     immagine = get_object_or_404(Immagine, pk=immagine_pk)
     response = FileResponse(open(str(immagine.foto_modificata), 'rb'))
     return response
+
+
+class ImmagineDeleteView(DeleteView):
+    model = Immagine
+    template_name = "cancella_immagine.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data()
+        immagine = "Immagine"
+        ctx["immagine"] = immagine
+        return ctx
+
+    def get_success_url(self):
+        return reverse("immagine-list")
