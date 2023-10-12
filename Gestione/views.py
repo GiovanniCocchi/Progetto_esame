@@ -49,6 +49,12 @@ class Prenotazione_Servizio(LoginRequiredMixin,CreateView):
         if oggi2 > data_scelta:
             form.add_error('data', 'Scegli una data futura')
             return self.form_invalid(form)
+        reflex = form.cleaned_data['reflex']
+        actioncam= form.cleaned_data['actioncam']
+        drone= form.cleaned_data['drone']
+        if not reflex and not actioncam and not drone:
+            form.add_error('reflex', 'Scegli almeno uno strumento')
+            return self.form_invalid(form)
         # Recuperiamo il cliente e lo impostiamo
         cliente = self.get_user()
         form.instance.cliente = cliente

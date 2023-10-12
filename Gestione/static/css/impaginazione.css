@@ -9,3 +9,16 @@ div.split2 div{
 div.clearer{
     float: none; clear: left
     }
+
+        /* Aggiungi stili CSS per personalizzare l'aspetto */
+.image-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Allinea le immagini al centro */
+        }
+
+        /* Aggiungi stili se necessario per le immagini */
+        .image-column img {
+            margin-bottom: 10px; /* Aggiungi spazio tra le immagini */
+        }
+

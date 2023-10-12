@@ -16,6 +16,10 @@
           {% if imm.foto_modificata %}
           <strong>Immagine modificata:</strong> <a href="{% url 'scarica_foto_modificata' imm.pk %}" download="{{ immagine.foto_modificata.name }}"><button>scarica</button></a> <br><br>
           {% endif %}
+          <form method="GET" action="{% url 'CancellaImmagine' imm.pk %}">
+                {% csrf_token %}
+            <button class="pulsante-rosso" type="submit">Cancella</button>
+          </form>
           <br>
         </li>
       <br>
