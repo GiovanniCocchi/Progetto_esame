@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'Gestione',
     'crispy_forms',
     'crispy_bootstrap4',
-
+    'chat',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +77,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Photoapp.wsgi.application'
+ASGI_APPLICATION = 'Photoapp.routing.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 
 # Database
