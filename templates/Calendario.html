@@ -22,11 +22,9 @@
 <body>
   <h1>Calendario</h1>
   <div>
-    <!--<button id="prevMonth">Mese Precedente</button>-->
     <a id="prevMonth" href="#">Mese Precedente</a>
     <span id="currentMonthYear"></span>
     <a id="nextMonth" href="#">Mese Successivo</a>
-    <!--<button id="nextMonth">Mese Successivo</button>-->
   </div>
   <table>
     <tr>
@@ -39,7 +37,7 @@
       <th>Sabato</th>
     </tr>
     <tbody id="calendarBody">
-      <!-- Contenuto del calendario verrà generato qui -->
+
     </tbody>
   </table>
 
@@ -82,6 +80,10 @@
       serviceInfoByDay[dayOfMonth] = servizio[Object.keys(servizio)[0]];
     });
 
+
+
+
+
     for (let row = 0; row < 6; row++) {
   calendarHTML += "<tr>";
   for (let col = 0; col < 7; col++) {
@@ -102,8 +104,31 @@
           let dayContent = `<td class="has-service">${dayCount}<br>`;
 
           if (photographer) {
-            dayContent += `Fotografo: ${photographer}<br>`;
-          }
+              if (Array.isArray(photographer)) {
+        // Se photographer è un array, verifica i singoli fotografi
+                if (photographer.includes(3) && photographer.includes(4)) {
+                   dayContent += 'Fotografi: Fabio giococchiphoto<br>';
+                     } else if (photographer.includes(3)) {
+                       dayContent += 'Fotografo: giococchiphoto<br>';
+                     } else if (photographer.includes(4)) {
+                       dayContent += 'Fotografo: Fabio<br>';
+                      }
+                    } else {
+
+                  if (photographer === 3) {
+                      dayContent += 'Fotografo: giococchiphoto<br>';
+                      } else if (photographer === 4) {
+                       dayContent += 'Fotografo: Fabio<br>';
+                       }
+                    }
+                }
+
+
+
+
+
+
+
 
           if (reflex) {
             dayContent += "Reflex ";

@@ -3,9 +3,9 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def chatpage(request):
+"""def chatpage(request):
     username = request.user.username
-    return render(request,"chat/chatpage.html", context={"msg":"ChatPageRoom!", 'username':username})
+    return render(request,"chat/chatpage.html", context={"msg":"ChatPageRoom!", 'username':username})"""
 
 @login_required
 def chatroom(request, room):
