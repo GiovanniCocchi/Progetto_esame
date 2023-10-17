@@ -28,6 +28,8 @@ class WSConsumerChat(AsyncWebsocketConsumer):
 
 class WSConsumerChatChannels(AsyncWebsocketConsumer):
 
+    room_users ={}
+
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room']
         self.room_group_name = 'chat_' + self.room_name
@@ -37,15 +39,43 @@ class WSConsumerChatChannels(AsyncWebsocketConsumer):
             self.channel_name
         )
 
-        await self.accept()
+
+        room_users = self.get_room_users()
+
+        if len(room_users) < 2:
+            await self.channel_layer.group_add(
+                self.room_group_name,
+                self.channel_name
+            )
+            room_users.add(self.channel_name)
+            self.set_room_users(room_users)
+            await self.accept()
+        else:
+            await self.close()
+
+    def get_room_users(self):
+        # Restituisce la lista degli utenti attualmente nella stanza
+        return WSConsumerChatChannels.room_users.get(self.room_group_name, set())
+
+    def set_room_users(self, users_set):
+            # Set the set of users in the room
+            WSConsumerChatChannels.room_users[self.room_group_name] = users_set
+
+        #await self.accept()
 
     async def disconnect(self, close_code):
+        room_users = self.get_room_users()
+        room_users.discard(self.channel_name)
+        self.set_room_users(room_users)
         await self.channel_layer.group_discard(
             self.room_group_name,
             self.channel_name
         )
 
     async def receive(self, text_data):
+        room_users = self.get_room_users()
+        room_users.add(self.channel_name)
+        self.set_room_users(room_users)
         text_data_json = json.loads(text_data)
         username = html.escape(text_data_json['user'])
         message = html.escape(text_data_json['msg'])

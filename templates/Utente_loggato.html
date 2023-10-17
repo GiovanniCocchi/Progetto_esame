@@ -19,7 +19,8 @@
     <!-- Pulsante per visualizzare tutti i servizi prenotati -->
     <a href="{% url 'servizio-list' %}"><button>Servizi Prenotati</button></a>
     <!-- Pulsante per andare alla chat -->
-    <a href="{% url 'chat:chatpage' %}"><button>Chat</button></a>
+    <a href="{% url 'chat:chatroom' room='Fabio' %}"><button>Chat con Fabio</button></a>
+    <a href="{% url 'chat:chatroom' room='giococchiphoto' %}"><button>Chat con giococchiphoto</button></a>
     <!-- Pulsante per andare alla sezione di modifica foto -->
     <a href="{% url 'carica_immagine' user_pk %}"><button>Modifica Foto</button></a>
     <!-- Pulsante per visualizzare tutte le immagini da modificare -->
@@ -35,7 +36,7 @@
     <!-- Pulsante per visualizzare tutte le immagini da modificare -->
     <a href="{% url 'immagine-list_ph' %}"><button>Immagini da modificare</button></a>
     <!-- Pulsante per andare alla chat -->
-    <a href="{% url 'chat:chatpage' %}"><button>Chat</button></a>
+    <a href="{% url 'chat:chatroom' room=user.username %}"><button>Chat</button></a>
     <!-- Pulsante per il logout -->
     <a href="{% url 'Home' %}"><button>Logout</button></a>
     {% endif %}

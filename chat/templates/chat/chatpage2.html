@@ -8,6 +8,10 @@
   <h1 id="header">{{msg}}</h1>
 </div>
 
+<script>
+        var username = "{{ username }}";
+    </script>
+
 {% load static %}
 
   <p> Chatlog: </p>
@@ -21,8 +25,8 @@
   </div>
 
   <br><br>
-  <label for="username">Username:</label>
-  <input type="text" name="username" id="username"> <br> <br>
+  <label for="username">Username: {{username}}</label> <br> <br>
+  <!--<input type="text" name="username" id="username"> <br> <br> -->
   <label for="msg">Messaggio:</label>
   <input type="text" name="msg" id="msg"> <br> <br>
 
@@ -51,7 +55,7 @@ socket.onmessage = function(event){
     roomUsersColors[data_user] = Math.random() * 360;
 
   var chatMsg = document.createElement("div");
-  chatMsg.className = "media border p-3"; 
+  chatMsg.className = "media border p-3";
   var img = document.createElement("img");
   img.src = "http://127.0.0.1:8000/static/imgs/img_avatar3.png";
   img.alt = data_user;
@@ -74,7 +78,7 @@ socket.onmessage = function(event){
 function btnClick() {
 
     var obj = new Object();
-    obj.user = sanitizeString(document.querySelector('#username').value);
+    obj.user = sanitizeString(username);
     obj.msg = sanitizeString(document.querySelector('#msg').value);
     var string = JSON.stringify(obj);
     socket.send(string);
@@ -84,5 +88,6 @@ function btnClick() {
   }
 
 </script>
+<a href="{% url 'Loggato' %}"><button>Indietro</button></a>
 
 {% endblock %}

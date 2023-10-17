@@ -42,6 +42,12 @@ socket.onmessage = function(event){
   
 }
 
+socket.onclose = function(event) {
+  // Pulisci la sezione chatlog quando il socket si chiude
+  var d = document.querySelector('#chatlog');
+  d.value = "Il socket si è chiuso. Ricarica la pagina per riconnetterti.";
+}
+
 function btnClick() {
     var obj = new Object();
     obj.user = sanitizeString(username);
@@ -57,6 +63,12 @@ function btnClick() {
     socket.send("UPDATE");
     }, 1);
 
+document.addEventListener("DOMContentLoaded", function() {
+  var d = document.querySelector('#chatlog');
+  d.value = "";
+});
+
 </script>
+<a href="{% url 'Loggato' %}"><button>Indietro</button></a>
 
 {% endblock %}
