@@ -3,12 +3,15 @@
 {% block title %} Chat Page {% endblock %}
 
 {% block content %}
+<script>
+        var username = "{{ username }}";
+    </script>
 
 <h1>   {{msg}}  </h1>
 
 
-  <label for="uname">Username:</label>
-  <input type="text" name="uname" id="username"> <br> <br>
+  <label for="uname">Username: {{username}}</label> <br>
+  <!--<input type="text" name="uname" id="username"> <br> <br> -->
   <label for="msg">Messaggio:</label>
   <input type="text" name="msg" id="msg"> <br> <br>
 
@@ -41,7 +44,7 @@ socket.onmessage = function(event){
 
 function btnClick() {
     var obj = new Object();
-    obj.user = sanitizeString(document.querySelector('#username').value);
+    obj.user = sanitizeString(username);
     obj.msg  = sanitizeString(document.querySelector('#msg').value);
     var string = JSON.stringify(obj);
     socket.send(string);
