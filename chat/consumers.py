@@ -5,7 +5,7 @@ import json
 messages_list = []
 
 
-class WSConsumerChat(AsyncWebsocketConsumer):
+"""class WSConsumerChat(AsyncWebsocketConsumer):
 
     async def connect(self):
         await self.accept()
@@ -23,7 +23,7 @@ class WSConsumerChat(AsyncWebsocketConsumer):
                 messages_list.append(json.loads(text_data))
 
         if len(messages_list) > 20:
-            messages_list.clear()
+            messages_list.clear()"""
 
 
 class WSConsumerChatChannels(AsyncWebsocketConsumer):
