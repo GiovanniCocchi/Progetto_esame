@@ -10,4 +10,4 @@ def chatpage(request):
 @login_required
 def chatroom(request, room):
     username= request.user.username
-    return render(request, "chat/chatpage2.html", context={"msg":room,'username':username})
+    return render(request, "chat/chat.html", context={"msg":room,'username':username})

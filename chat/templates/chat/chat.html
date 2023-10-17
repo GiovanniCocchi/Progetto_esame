@@ -47,32 +47,26 @@ var roomUsersColors = {};
 socket.onmessage = function(event){
 
   var container = document.querySelector("#chatlog");
-  var data = JSON.parse(event.data);
-  var data_user = sanitizeString(data["user"]);
-  var data_msg = sanitizeString(data["msg"]);
+    var data = JSON.parse(event.data);
+    var data_user = sanitizeString(data["user"]);
+    var data_msg = sanitizeString(data["msg"]);
 
-  if(roomUsersColors[data_user]==undefined)
-    roomUsersColors[data_user] = Math.random() * 360;
+    if(roomUsersColors[data_user] == undefined)
+        roomUsersColors[data_user] = Math.random() * 360;
 
-  var chatMsg = document.createElement("div");
-  chatMsg.className = "media border p-3";
-  var img = document.createElement("img");
-  img.src = "http://127.0.0.1:8000/static/imgs/img_avatar3.png";
-  img.alt = data_user;
-  img.className = "mr-3 mt-3 rounded-circle"
-  img.style = "width:60px;filter:hue-rotate("+ roomUsersColors[data_user] +"deg);";
-  var innerDiv = document.createElement("div");
-  innerDiv.className = "media-body";
+    var chatMsg = document.createElement("div");
+    chatMsg.className = "media border p-3";
 
-  var ts = new Date();
-  innerDiv.innerHTML =    "<h4>" + data_user + " <small><i>" + 
-                              ts.getHours()+":"+ts.getMinutes()+":"+ts.getSeconds() + " </i></small></h4>" + 
+    var innerDiv = document.createElement("div");
+    innerDiv.className = "media-body";
+
+    var ts = new Date();
+    innerDiv.innerHTML =    "<h4>" + data_user + " <small><i>" +
+                              ts.getHours()+":"+ts.getMinutes()+":"+ts.getSeconds() + " </i></small></h4>" +
                               "<p>" + data_msg + "</p>";
 
-  chatMsg.appendChild(img);
-  chatMsg.appendChild(innerDiv);
-  container.appendChild(chatMsg);
-
+    chatMsg.appendChild(innerDiv);
+    container.appendChild(chatMsg);
 }
 
 function btnClick() {
@@ -82,7 +76,7 @@ function btnClick() {
     obj.msg = sanitizeString(document.querySelector('#msg').value);
     var string = JSON.stringify(obj);
     socket.send(string);
-    document.querySelector('#username').disabled = true
+    document.querySelector('#username').disabled = true;
     document.querySelector('#msg').value = "";
 
   }
