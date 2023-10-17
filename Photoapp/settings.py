@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,7 +46,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4',
     'chat',
-    'channels',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +77,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Photoapp.wsgi.application'
-ASGI_APPLICATION = 'Photoapp.routing.application'
+ASGI_APPLICATION = 'Photoapp.asgi.application'
 
 CHANNEL_LAYERS = {
     "default": {
