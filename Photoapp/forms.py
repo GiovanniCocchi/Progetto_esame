@@ -7,6 +7,7 @@ from django import forms
 from django.forms import DateInput
 
 from Gestione.models import Servizio, Immagine
+from Joinus.models import Candidatura
 
 
 class CreaCliente(UserCreationForm):
@@ -66,4 +67,18 @@ class ImmagineUpdateView(forms.ModelForm):
         if commit:
             istanza.save()
         return istanza
+
+
+class CaricaCandidatura(forms.ModelForm):
+    helper = FormHelper()
+    helper.form_id = "carica_candidatura"
+    helper.form_method = "POST"
+    helper.add_input(Submit('submit', 'submit'))
+
+    def __init__(self, *args, **kwargs):
+        super(CaricaCandidatura, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Candidatura
+        fields=['nome', 'cognome', 'reflex', 'actioncam', 'drone', 'patente', 'album', 'email']
 

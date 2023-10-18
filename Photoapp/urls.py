@@ -29,7 +29,8 @@ urlpatterns = [
     path('Registrazione_Cliente/', CreaUtente.as_view(), name='Crea_cliente'),
     path('Gestione/', include("Gestione.urls")),
     path('Calendario/', Calendario_page.as_view(), name="Calendario"),
-    path('chat/', include("chat.urls"))
+    path('chat/', include("chat.urls")),
+    path('Joinus/', include("Joinus.urls"))
 ]
 crea_gruppi()
 
