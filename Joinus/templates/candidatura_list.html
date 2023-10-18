@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Candidature aperte</h1>
+
+{% if candidature %}
+    <ul>
+        {% for candidatura in candidature %}
+            <li>
+                <strong>Nome:</strong> {{ candidatura.nome }}<br>
+                <strong>Cognome:</strong> {{ candidatura.cognome }}<br>
+                <strong>Data:</strong> {{ candidatura.data }}<br>
+                <strong>Reflex:</strong> {% if candidatura.reflex %}Sì{% else %}No{% endif %}<br>
+                <strong>Actioncam:</strong> {% if candidatura.actioncam %}Sì{% else %}No{% endif %}<br>
+                <strong>Drone:</strong> {% if candidatura.drone %}Sì{% else %}No{% endif %}<br>
+                <strong>Patente:</strong> {% if candidatura.patente %}Sì{% else %}No{% endif %}<br>
+                <strong>Album:</strong> <a href="{{ candidatura.album }}" target="_blank">Vai all'album</a><br>
+                <strong>Email:</strong> {{ candidatura.email }}<br>
+            </li>
+            <br>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Nessuna candidatura disponibile.</p>
+{% endif %}
+
+      </ul>
+
+<a href="{% url 'Loggato' %}"><button>Indietro</button></a>
+{% endblock %}

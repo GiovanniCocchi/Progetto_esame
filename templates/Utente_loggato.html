@@ -37,8 +37,11 @@
     <a href="{% url 'immagine-list_ph' %}"><button>Immagini da modificare</button></a>
     <!-- Pulsante per andare alla chat -->
     <a href="{% url 'chat:chatroom' room=user.username %}"><button>Chat</button></a>
+    <!-- Pulsante per vedere le candidature -->
+    <a href="{% url 'Candidature' %}"><button>Visiona le candidature</button></a>
     <!-- Pulsante per il logout -->
     <a href="{% url 'Home' %}"><button>Logout</button></a>
+
     {% endif %}
 
 
