@@ -47,7 +47,6 @@ class Calendario_page(ListView):
             data_odierna = datetime.now().date()
             servizi = Servizio.objects.filter(Q(data__year=data_odierna.year) & Q(data__month=data_odierna.month))
         data = serializers.serialize('json', servizi)
-        # QUI
         data = json.loads(
             data)  # [{'data': '2023-09-06', 'reflex': True, 'actioncam': True, 'drone': False, 'fotografi': [1]}]
         # let servizi = [{'data': '2023-09-06', 'reflex': True, 'actioncam': True, 'drone': False, 'fotografi': [1]}];

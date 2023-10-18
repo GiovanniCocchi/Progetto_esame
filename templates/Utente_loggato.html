@@ -11,8 +11,9 @@
 
 
 <body>
-    {% if "cliente" in  user.groups.all.0.name %}
     <h1>Benvenuto {{ user.username }}</h1>
+    {% if "cliente" in  user.groups.all.0.name %}
+
 
     <!-- Pulsante per la prenotazione di servizio -->
     <a href="{% url 'Prenotazione' user_pk %}"><button>Prenota Servizio</button></a>
@@ -31,7 +32,6 @@
 
 
     {% if "fotografo" in  user.groups.all.0.name %}
-    <h1>Benvenuto {{ user.username }}</h1>
 
     <!-- Pulsante per visualizzare tutte le immagini da modificare -->
     <a href="{% url 'immagine-list_ph' %}"><button>Immagini da modificare</button></a>
