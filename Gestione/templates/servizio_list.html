@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>I tuoi servizi</h1>
+
+  {% if servizi %}
+    <ul>
+      {% for servizio in servizi %}
+        <li>
+          <strong>Data:</strong> {{ servizio.data }}<br>
+          <strong>Reflex:</strong> {% if servizio.reflex %}Sì{% else %}No{% endif %}<br>
+          <strong>Actioncam:</strong> {% if servizio.actioncam %}Sì{% else %}No{% endif %}<br>
+          <strong>Drone:</strong> {% if servizio.drone %}Sì{% else %}No{% endif %}<br>
+          <strong>Fotografi:</strong>
+          {% for fotografo in servizio.fotografi.all %}
+            {{ fotografo.username }}
+          {% endfor %}<br>
+            <form method="GET" action="{% url 'CancellaServizio' servizio.pk %}">
+                {% csrf_token %}
+                <button class="pulsante-rosso" type="submit">Cancella</button>
+            </form>
+          <br>
+
+
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Nessun servizio disponibile.</p>
+  {% endif %}
+
+<a href="{% url 'Loggato' %}"><button>Indietro</button></a>
+{% endblock %}
