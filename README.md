@@ -1,6 +1,6 @@
 # Progetto_esame
 Per far partire il progetto sono necessari:
-python 9.0
+python 3.9
 django
 pycharm 
 
